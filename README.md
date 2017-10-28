@@ -1,5 +1,8 @@
 ## Plugin para Chrome
 
-Transforme todas as imagens de um site em fotos do Vampeta.
+¡Acho!
+Que no me salen las cuentas!
 
-https://chrome.google.com/webstore/detail/nvampeta/pebnbbhfnlmonnpbnbkmjfffmngddnbg
+Plugin para calcular las horas que has trabajado de mas o te faltan en PCC.
+
+De momento en estado BETA ya que falta por saber a partir de cuanto cuentan las horas extra y las de menos
