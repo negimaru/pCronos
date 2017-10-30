@@ -9,7 +9,11 @@ De momento en estado BETA ya que falta por saber a partir de cuanto cuentan las 
 
 
 Instrucciones:
- -Cargar Plugin como desarrollador en Chrome/Opera
- -Ir a la tabla de fichajes
- -Expandir a 365( Se añade con el Plugin )
- -Pulsar Boton
+
+ *-Cargar Plugin como desarrollador en Chrome/Opera
+
+ *-Ir a la tabla de fichajes
+
+ *-Expandir a 365( Se añade con el Plugin )
+
+ *-Pulsar Boton
