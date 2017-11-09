@@ -3,7 +3,9 @@ $(document).ready(function() {
     createContainers();
     createPanel();
     getAllDates();
-	showLicense();
+    
+    //showLicense();
+    
 	
     $(document).on('click', '#devuelveHoras', function() {    
         var segundosDeMas = 0;
@@ -20,12 +22,14 @@ $(document).ready(function() {
                 var horasTotales = 0;
                 //console.log('Horas Trabajadas el Dia : ' , fecha , ' : ' , formatSecondstoHours(tiempoDia) );
                 if (tiempoDia > 28800) {
+                    if( (tiempoDia - 28800)  >=  1800){
                     //console.log('Has Trabajado : ', formatSecondstoHours(tiempoDia-28800) ,' De Mas' );
                     //minutosExtra += (salidaDia - entradaDia) / 60;
                     segundosDeMas += tiempoDia - 28800;
                     diaTrabajado.fecha = fecha;
                     diaTrabajado.tiempoTrabajado = tiempoDia - 28800;
                     diasQueHasTrabajadoDeMas.push(diaTrabajado);
+                    }
                 }
                 if (tiempoDia < 28800) {
                     segundosDeMenos += 28800 - tiempoDia;
@@ -169,7 +173,7 @@ $(document).ready(function() {
     }
 
 
-
+/**
     function showLicense() {
         console.log('----------------------------------------------------------------------------');
         console.log('"THE BEER-WARE LICENSE 🍺" (Revision 42):');
@@ -180,5 +184,7 @@ $(document).ready(function() {
         console.log(' ----------------------------------------------------------------------------');
 
     }
+**/
+
 
 });
