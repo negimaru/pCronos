@@ -2,12 +2,16 @@ $(document).ready(function() {
     var minutosExtra = 0;
     createContainers();
     createPanel();
-    getAllDates();
-    
+    getDates(365, '365');
+
+    var daysSinceLast21 = getDaysDifference(new Date, getLast21FromDate(new Date));
+    var weekendDaysSinceLast21 = getWeekendDays(getLast21FromDate(new Date), new Date);
+    var currentMonthDays = daysSinceLast21-weekendDaysSinceLast21;
+    getDates(currentMonthDays, 'Mes Actual(desde el 21)');
+
     //showLicense();
-    
-	
-    $(document).on('click', '#devuelveHoras', function() {    
+
+    $(document).on('click', '#devuelveHoras', function() {
         var segundosDeMas = 0;
         var segundosDeMenos = 0;
         var diasQueHasTrabajadoDeMas = [];
@@ -23,12 +27,12 @@ $(document).ready(function() {
                 //console.log('Horas Trabajadas el Dia : ' , fecha , ' : ' , formatSecondstoHours(tiempoDia) );
                 if (tiempoDia > 28800) {
                     if( (tiempoDia - 28800)  >=  1800){
-                    //console.log('Has Trabajado : ', formatSecondstoHours(tiempoDia-28800) ,' De Mas' );
-                    //minutosExtra += (salidaDia - entradaDia) / 60;
-                    segundosDeMas += tiempoDia - 28800;
-                    diaTrabajado.fecha = fecha;
-                    diaTrabajado.tiempoTrabajado = tiempoDia - 28800;
-                    diasQueHasTrabajadoDeMas.push(diaTrabajado);
+                        //console.log('Has Trabajado : ', formatSecondstoHours(tiempoDia-28800) ,' De Mas' );
+                        //minutosExtra += (salidaDia - entradaDia) / 60;
+                        segundosDeMas += tiempoDia - 28800;
+                        diaTrabajado.fecha = fecha;
+                        diaTrabajado.tiempoTrabajado = tiempoDia - 28800;
+                        diasQueHasTrabajadoDeMas.push(diaTrabajado);
                     }
                 }
                 if (tiempoDia < 28800) {
@@ -53,7 +57,7 @@ $(document).ready(function() {
         createTableHoras(horasTotales, segundosDeMas, segundosDeMenos);
         //createTableDias(diasQueHasTrabajadoDeMas, 'Dias De Mas', '.daysContainerMore');
         //createTableDias(diasQueHasTrabajadoDeMenos, 'Dias de Menos', '.daysContainerLess');
-    })
+    });
 
     function timeToSecs(workTime) {
         var esplicedTime = workTime.split(":");
@@ -153,28 +157,54 @@ $(document).ready(function() {
 
     }
 
-    function getAllDates() {
+    function getDates(days, text) {
         $('.pagesize').append($('<option>', {
-            value: 365,
-            text: '365',
+            value: days,
+            text: text,
         }));
-        $('#myTable').trigger('pageSize', 365);
-        $('#myTable').trigger('appendCache', 365);
-        $('#myTable').trigger('applyWidgetId', 365);
-        $('#myTable').trigger('applyWidgets', 365);
-        $('#myTable').trigger('load', 365);
-        $('#myTable').trigger('sorton', 365);
-        $('#myTable').trigger('unload', 365);
-        $('#myTable').trigger('update', 365);
-        $('#myTable').trigger('updateCell', 365);
-        $('#myTable').trigger('updateCell', 365);
-
-
+        $('#myTable').trigger('pageSize', days);
+        $('#myTable').trigger('appendCache', days);
+        $('#myTable').trigger('applyWidgetId', days);
+        $('#myTable').trigger('applyWidgets', days);
+        $('#myTable').trigger('load', days);
+        $('#myTable').trigger('sorton', days);
+        $('#myTable').trigger('unload', days);
+        $('#myTable').trigger('update', days);
+        $('#myTable').trigger('updateCell', days);
+        $('#myTable').trigger('updateCell', days);
     }
 
+    function getLast21FromDate(referenceDate) {
+        var last21;
 
-/**
-    function showLicense() {
+        if (referenceDate.getMonth() === 0) {
+            last21 = new Date(referenceDate.getFullYear()-1, 12, 21);
+        } else {
+            last21 = new Date(referenceDate.getFullYear(), referenceDate.getMonth()-1, 21);
+        }
+
+        return last21;
+    }
+
+    function getWeekendDays(date1, date2) {
+        var weekendDayCount = 0;
+
+        while(date1 < date2){
+            if(date1.getDay() === 0 || date1.getDay() === 6){
+                ++weekendDayCount ;
+            }
+            date1.setDate(date1.getDate() + 1);
+        }
+
+        return weekendDayCount ;
+    }
+
+    function getDaysDifference(date1, date2) {
+        return Math.round(Math.abs(date1 - date2) / 8.64e7);
+    }
+
+    /**
+     function showLicense() {
         console.log('----------------------------------------------------------------------------');
         console.log('"THE BEER-WARE LICENSE 🍺" (Revision 42):');
         console.log('<Vistoraso> wrote this file. As long as you retain this notice you');
@@ -184,7 +214,7 @@ $(document).ready(function() {
         console.log(' ----------------------------------------------------------------------------');
 
     }
-**/
+     **/
 
 
 });
